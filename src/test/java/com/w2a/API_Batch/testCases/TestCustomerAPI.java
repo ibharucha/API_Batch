@@ -13,7 +13,7 @@ import io.restassured.response.Response;
 
 public class TestCustomerAPI extends APISetUp {
 	
-	@Test(dataProviderClass = DataProviders.class,dataProvider = "dp",priority = 1,enabled = true,dependsOnMethods = "m1")
+	@Test(dataProviderClass = DataProviders.class,dataProvider = "dp",priority = 1,enabled = true)
 	public void validateCreateCustomerAPIWithValidData(Hashtable<String, String> data)
 	{
 		
@@ -26,10 +26,7 @@ public class TestCustomerAPI extends APISetUp {
 		Assert.assertEquals(response.getStatusCode(),200);
 	}
 	
-	@Test(priority = 0)
-	public void m1() {
-		Assert.fail();
-	}
+	
 
 //	@Test(dataProviderClass = DataProviders.class, dataProvider = "dp", priority = 0, enabled = true)
 //	public void validateCreateCustomerAPIWithInValidAuthKey(Hashtable<String, String> data) {
