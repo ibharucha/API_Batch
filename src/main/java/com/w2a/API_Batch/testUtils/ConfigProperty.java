@@ -14,11 +14,14 @@ public interface ConfigProperty extends Config {
 	String getBasePath();
 
 	@Key("secretKey")
-	String GetSecretKey();
+	String getSecretKey();
 	
 	@Key("testReportPath")
 	String getTestReportPath();
 	
 	@Key("testReportName")
 	String getTestReportName();
+	
+	@Key("testDataSheetName")
+	String getTestDataSheetName();
 }

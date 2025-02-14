@@ -26,7 +26,7 @@ public class APISetUp {
 
 	public static ConfigProperty configProperty;
 
-	public static ExcelReader excel = new ExcelReader("./src/test/resources/testData/testdata.xlsx");
+	public static ExcelReader excel = new ExcelReader("C:\\Users\\techintrend.ca\\eclipse-workspace\\API_Batch\\src\\test\\resources\\testData\\testdata.xlsx");
 	public static ExtentReports extentReports;
 	public static ThreadLocal<ExtentTest> classLevelLog = new ThreadLocal<ExtentTest>();
 	public static ThreadLocal<ExtentTest> testLevelLog = new ThreadLocal<ExtentTest>();
@@ -52,36 +52,42 @@ public class APISetUp {
 
 	@BeforeMethod
 	public void beforeMethod(Method method) {
-
+		
 		ExtentTest test = classLevelLog.get().createNode(method.getName());
 		testLevelLog.set(test);
-		testLevelLog.get().info("Test case:-" + method.getName() + " execution started");
-		// System.out.println("Test case :- " + method.getName() + " Execusion
-		// started");
+
+//		ExtentTest test = classLevelLog.get().createNode(method.getName());
+//		testLevelLog.set(test);
+//		testLevelLog.get().info("Test case:-" + method.getName() + " execution started");
+//		// System.out.println("Test case :- " + method.getName() + " Execusion
+//		// started");
 
 	}
 
 	@AfterMethod
 	public void afterMethod(ITestResult result) {
-		if (result.getStatus() == ITestResult.SUCCESS) {
-			testLevelLog.get().pass("Test Case Passed");
-		} else if (result.getStatus() == ITestResult.FAILURE) {
-			testLevelLog.get().fail("Test Case Failed");
-		} else if (result.getStatus() == ITestResult.SKIP) {
-			testLevelLog.get().skip("Test Case Skipped");
-		}
-		extentReports.flush();
+//		if (result.getStatus() == ITestResult.SUCCESS) {
+//			testLevelLog.get().pass("Test Case Passed");
+//		} else if (result.getStatus() == ITestResult.FAILURE) {
+//			testLevelLog.get().fail("Test Case Failed");
+//		} else if (result.getStatus() == ITestResult.SKIP) {
+//			testLevelLog.get().skip("Test Case Skipped");
+//		}
+//		extentReports.flush();
 	}
 
 	@AfterSuite
 	public void afterSuite() {
-		configProperty = ConfigFactory.create(ConfigProperty.class);
-		RestAssured.baseURI = configProperty.getBaseURI();
-		RestAssured.basePath = configProperty.getBasePath();
+//		configProperty = ConfigFactory.create(ConfigProperty.class);
+//		RestAssured.baseURI = configProperty.getBaseURI();
+//		RestAssured.basePath = configProperty.getBasePath();
 	}
+	
 
 	public static RequestSpecification setRequestSpecification() {
-		RequestSpecification spec = given().auth().basic(configProperty.GetSecretKey(), "");
+		RequestSpecification spec = given().auth().basic(configProperty.getSecretKey(), "");
+		testLevelLog.get().info("Request Specification Set for Secret Key");
+		
 		return spec;
 	}
 }
